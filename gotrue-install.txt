@@ -1,0 +1,11 @@
+- build gotrue
+- config (change to postgresql)
+  GOTRUE_DB_DRIVER=postgres
+  DATABASE_URL="postgres://db_user:password@host_name:5432/db_name?sslmode=disable"
+- create db gotrue, user: gotrue, 
+- load postgres_dump_file : 
+  psql -h localhost -U gotrue --password -f /home/bandirsen/works/project/gotrue/pgdump.psql -d gotrue
+- create gotrue admin :
+  gotrue admin createuser -i 00000000-0000-0000-0000-000000000000 mail@example.com password --superadmin --confirm
+ 
+

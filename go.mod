@@ -10,8 +10,10 @@ require (
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/go-chi/chi v3.1.4+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/gobuffalo/attrs v0.1.0 // indirect
 	github.com/gobuffalo/fizz v1.9.5 // indirect
 	github.com/gobuffalo/genny v0.4.1 // indirect
+	github.com/gobuffalo/gogen v0.2.0 // indirect
 	github.com/gobuffalo/nulls v0.1.0 // indirect
 	github.com/gobuffalo/packr/v2 v2.7.1 // indirect
 	github.com/gobuffalo/pop v4.12.2+incompatible
@@ -22,6 +24,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/jonboulle/clockwork v0.0.0-20180716110948-e7c6d408fd5c // indirect
 	github.com/kelseyhightower/envconfig v1.3.0
+	github.com/markbates/safe v1.0.1 // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/mattn/go-sqlite3 v1.11.0 // indirect
@@ -35,10 +38,12 @@ require (
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.4.0
-	golang.org/x/crypto v0.0.0-20191107222254-f4817d981bb6
-	golang.org/x/net v0.0.0-20191108063844-7e6e90b9ea88 // indirect
+	golang.org/x/crypto v0.0.0-20191122220453-ac88ee75c92c
+	golang.org/x/lint v0.0.0-20191125180803-fdd1cda4f05f // indirect
+	golang.org/x/net v0.0.0-20191126235420-ef20fe5d7933 // indirect
 	golang.org/x/oauth2 v0.0.0-20170807180024-9a379c6b3e95
-	golang.org/x/sys v0.0.0-20191105231009-c1f44814a5cd // indirect
+	golang.org/x/sys v0.0.0-20191127021746-63cb32ae39b2 // indirect
+	golang.org/x/tools v0.0.0-20191127201027-ecd32218bd7f // indirect
 	golang.org/x/xerrors v0.0.0-20191011141410-1b5146add898 // indirect
 	google.golang.org/api v0.0.0-20170821230356-dd6bdadc5852 // indirect
 	google.golang.org/appengine v1.6.5 // indirect

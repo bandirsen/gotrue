@@ -64,6 +64,7 @@ type GlobalConfiguration struct {
 	OperatorToken     string        `split_words:"true" required:"true"`
 	MultiInstanceMode bool
 	SMTP              SMTPConfiguration
+	RateLimitHeader   string `split_words:"true"`
 }
 
 // EmailContentConfiguration holds the configuration for emails, both subjects and template URLs.
@@ -88,9 +89,9 @@ type ProviderConfiguration struct {
 type SMTPConfiguration struct {
 	MaxFrequency time.Duration `json:"max_frequency" split_words:"true"`
 	Host         string        `json:"host"`
-	Port         int           `json:"port" default:"587"`
+	Port         int           `json:"port,omitempty" default:"587"`
 	User         string        `json:"user"`
-	Pass         string        `json:"pass"`
+	Pass         string        `json:"pass,omitempty"`
 	AdminEmail   string        `json:"admin_email" split_words:"true"`
 }
 

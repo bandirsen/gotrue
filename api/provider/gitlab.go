@@ -17,17 +17,16 @@ type gitlabProvider struct {
 	Host string
 }
 
-func chooseHost(base, defaultHost string) string {
-	if base == "" {
-		return "https://" + defaultHost
-	}
+type gitlabUser struct {
+	Email       string `json:"email"`
+	Name        string `json:"name"`
+	AvatarURL   string `json:"avatar_url"`
+	ConfirmedAt string `json:"confirmed_at"`
+}
 
-	baseLen := len(base)
-	if base[baseLen-1] == '/' {
-		return base[:baseLen-1]
-	}
-
-	return base
+type gitlabUserEmail struct {
+	ID    int    `json:"id"`
+	Email string `json:"email"`
 }
 
 // NewGitlabProvider creates a Gitlab account provider.
@@ -57,7 +56,7 @@ func (g gitlabProvider) GetOAuthToken(code string) (*oauth2.Token, error) {
 }
 
 func (g gitlabProvider) GetUserData(ctx context.Context, tok *oauth2.Token) (*UserProvidedData, error) {
-	var u githubUser
+	var u gitlabUser
 
 	if err := makeRequest(ctx, tok, g.Config, g.Host+"/api/v4/user", &u); err != nil {
 		return nil, err
@@ -70,21 +69,25 @@ func (g gitlabProvider) GetUserData(ctx context.Context, tok *oauth2.Token) (*Us
 		},
 	}
 
-	var emails []*githubUserEmail
+	var emails []*gitlabUserEmail
 	if err := makeRequest(ctx, tok, g.Config, g.Host+"/api/v4/user/emails", &emails); err != nil {
 		return nil, err
 	}
 
-	if len(emails) > 0 {
-		data.Email = emails[0].Email
+	for _, e := range emails {
+		// additional emails from GitLab don't return confirm status
+		if e.Email != "" {
+			data.Emails = append(data.Emails, Email{Email: e.Email, Verified: false, Primary: false})
+		}
 	}
 
-	if data.Email == "" {
-		if u.Email != "" {
-			data.Email = u.Email
-		} else {
-			return nil, errors.New("Unable to find email with GitLab provider")
-		}
+	if u.Email != "" {
+		verified := u.ConfirmedAt != ""
+		data.Emails = append(data.Emails, Email{Email: u.Email, Verified: verified, Primary: true})
+	}
+
+	if len(data.Emails) <= 0 {
+		return nil, errors.New("Unable to find email with GitLab provider")
 	}
 
 	return data, nil

@@ -30,6 +30,10 @@ the payload values can be trusted.
 
 When signup is disabled the only way to create new users is through invites. Defaults to `false`, all signups enabled.
 
+`GOTRUE_RATE_LIMIT_HEADER` - `string`
+
+Header on which to rate limit the `/token` endpoint.
+
 ### API
 
 ```
@@ -72,10 +76,19 @@ Connection string for the database.
 
 Adds a prefix to all table names.
 
+**Migrations Note**
+
+Migrations are not applied automatically, so you will need to run them after
+you've built gotrue.
+
+* If built locally: `./gotrue migrate`
+* Using Docker: `docker run --rm gotrue gotrue migrate`
+
 ### Logging
 
 ```
-LOG_LEVEL=debug
+LOG_LEVEL=debug # available without GOTRUE prefix (exception)
+GOTRUE_LOG_FILE=/var/log/go/gotrue.log
 ```
 
 `LOG_LEVEL` - `string`
@@ -351,9 +364,12 @@ GoTrue exposes the following endpoints:
   ```json
   {
     "type": "signup",
-    "token": "confirmation-code-delivered-in-email"
+    "token": "confirmation-code-delivered-in-email",
+    "password": "12345abcdef"
   }
   ```
+  
+  `password` is required for signup verification if no existing password exists.
 
   Returns:
 

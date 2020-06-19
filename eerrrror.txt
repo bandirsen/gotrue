@@ -1,0 +1,67 @@
+ERROR:  syntax error at or near "\"
+LINE 1: \.
+        ^
+
+\.
+
+
+--
+-- Data for Name: instances; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
+--
+
+COPY gotrue.instances (id, uuid, raw_base_config, created_at, updated_at) FROM stdin
+ERROR:  syntax error at or near "\"
+LINE 1: \.
+        ^
+
+\.
+
+
+--
+-- Data for Name: refresh_tokens; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
+--
+
+COPY gotrue.refresh_tokens (instance_id, id, token, user_id, revoked, created_at, updated_at) FROM stdin
+ERROR:  syntax error at or near "\"
+LINE 1: \.
+        ^
+
+\.
+
+
+--
+-- Data for Name: schema_migration; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
+--
+
+COPY gotrue.schema_migration (version) FROM stdin
+ERROR:  syntax error at or near "20171026211738"
+LINE 1: 20171026211738
+        ^
+
+20171026211738
+20171026211808
+20171026211834
+20180103212743
+20180108183307
+20180119214651
+20180125194653
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
+--
+
+COPY gotrue.users (instance_id, id, aud, role, email, encrypted_password, confirmed_at, invited_at, confirmation_token, confirmation_sent_at, recovery_token, recovery_sent_at, email_change_token, email_change, email_change_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, is_super_admin, created_at, updated_at) FROM stdin
+ERROR:  syntax error at or near "\"
+LINE 1: \.
+        ^
+
+\.
+
+
+--
+-- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: gotrue; Owner: bandirsen
+--
+
+SELECT pg_catalog.setval('gotrue.refresh_tokens_id_seq', 1, true)

@@ -19,10 +19,10 @@ SET row_security = off;
 -- Name: gotrue; Type: SCHEMA; Schema: -; Owner: bandirsen
 --
 
-CREATE SCHEMA gotrue;
+--CREATE SCHEMA gotrue;
 
 
-ALTER SCHEMA gotrue OWNER TO bandirsen;
+--ALTER SCHEMA gotrue OWNER TO bandirsen;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -46,7 +46,7 @@ SET default_with_oids = false;
 -- Name: audit_log_entries; Type: TABLE; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE TABLE gotrue.audit_log_entries (
+CREATE TABLE public.audit_log_entries (
     instance_id character varying(255),
     id character varying(255) NOT NULL,
     payload json,
@@ -54,13 +54,13 @@ CREATE TABLE gotrue.audit_log_entries (
 );
 
 
-ALTER TABLE gotrue.audit_log_entries OWNER TO bandirsen;
+ALTER TABLE public.audit_log_entries OWNER TO bandirsen;
 
 --
 -- Name: instances; Type: TABLE; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE TABLE gotrue.instances (
+CREATE TABLE public.instances (
     id character varying(255) NOT NULL,
     uuid character varying(255),
     raw_base_config text,
@@ -69,13 +69,13 @@ CREATE TABLE gotrue.instances (
 );
 
 
-ALTER TABLE gotrue.instances OWNER TO bandirsen;
+ALTER TABLE public.instances OWNER TO bandirsen;
 
 --
 -- Name: refresh_tokens; Type: TABLE; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE TABLE gotrue.refresh_tokens (
+CREATE TABLE public.refresh_tokens (
     instance_id character varying(255),
     id bigint NOT NULL,
     token character varying(255),
@@ -86,13 +86,13 @@ CREATE TABLE gotrue.refresh_tokens (
 );
 
 
-ALTER TABLE gotrue.refresh_tokens OWNER TO bandirsen;
+ALTER TABLE public.refresh_tokens OWNER TO bandirsen;
 
 --
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE SEQUENCE gotrue.refresh_tokens_id_seq
+CREATE SEQUENCE public.refresh_tokens_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -100,31 +100,31 @@ CREATE SEQUENCE gotrue.refresh_tokens_id_seq
     CACHE 1;
 
 
-ALTER TABLE gotrue.refresh_tokens_id_seq OWNER TO bandirsen;
+ALTER TABLE public.refresh_tokens_id_seq OWNER TO bandirsen;
 
 --
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: gotrue; Owner: bandirsen
 --
 
-ALTER SEQUENCE gotrue.refresh_tokens_id_seq OWNED BY gotrue.refresh_tokens.id;
+ALTER SEQUENCE public.refresh_tokens_id_seq OWNED BY public.refresh_tokens.id;
 
 
 --
 -- Name: schema_migration; Type: TABLE; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE TABLE gotrue.schema_migration (
+CREATE TABLE public.schema_migration (
     version character varying(255) NOT NULL
 );
 
 
-ALTER TABLE gotrue.schema_migration OWNER TO bandirsen;
+ALTER TABLE public.schema_migration OWNER TO bandirsen;
 
 --
 -- Name: users; Type: TABLE; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE TABLE gotrue.users (
+CREATE TABLE public.users (
     instance_id character varying(255),
     id character varying(255) NOT NULL,
     aud character varying(255),
@@ -149,20 +149,20 @@ CREATE TABLE gotrue.users (
 );
 
 
-ALTER TABLE gotrue.users OWNER TO bandirsen;
+ALTER TABLE public.users OWNER TO bandirsen;
 
 --
 -- Name: refresh_tokens id; Type: DEFAULT; Schema: gotrue; Owner: bandirsen
 --
 
-ALTER TABLE ONLY gotrue.refresh_tokens ALTER COLUMN id SET DEFAULT nextval('gotrue.refresh_tokens_id_seq'::regclass);
+ALTER TABLE ONLY public.refresh_tokens ALTER COLUMN id SET DEFAULT nextval('public.refresh_tokens_id_seq'::regclass);
 
 
 --
 -- Data for Name: audit_log_entries; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
 --
 
-COPY gotrue.audit_log_entries (instance_id, id, payload, created_at) FROM stdin;
+COPY public.audit_log_entries (instance_id, id, payload, created_at) FROM stdin;
 \.
 
 
@@ -170,7 +170,7 @@ COPY gotrue.audit_log_entries (instance_id, id, payload, created_at) FROM stdin;
 -- Data for Name: instances; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
 --
 
-COPY gotrue.instances (id, uuid, raw_base_config, created_at, updated_at) FROM stdin;
+COPY public.instances (id, uuid, raw_base_config, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -178,7 +178,7 @@ COPY gotrue.instances (id, uuid, raw_base_config, created_at, updated_at) FROM s
 -- Data for Name: refresh_tokens; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
 --
 
-COPY gotrue.refresh_tokens (instance_id, id, token, user_id, revoked, created_at, updated_at) FROM stdin;
+COPY public.refresh_tokens (instance_id, id, token, user_id, revoked, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -186,7 +186,7 @@ COPY gotrue.refresh_tokens (instance_id, id, token, user_id, revoked, created_at
 -- Data for Name: schema_migration; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
 --
 
-COPY gotrue.schema_migration (version) FROM stdin;
+COPY public.schema_migration (version) FROM stdin;
 20171026211738
 20171026211808
 20171026211834
@@ -201,7 +201,7 @@ COPY gotrue.schema_migration (version) FROM stdin;
 -- Data for Name: users; Type: TABLE DATA; Schema: gotrue; Owner: bandirsen
 --
 
-COPY gotrue.users (instance_id, id, aud, role, email, encrypted_password, confirmed_at, invited_at, confirmation_token, confirmation_sent_at, recovery_token, recovery_sent_at, email_change_token, email_change, email_change_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, is_super_admin, created_at, updated_at) FROM stdin;
+COPY public.users (instance_id, id, aud, role, email, encrypted_password, confirmed_at, invited_at, confirmation_token, confirmation_sent_at, recovery_token, recovery_sent_at, email_change_token, email_change, email_change_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, is_super_admin, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -209,14 +209,14 @@ COPY gotrue.users (instance_id, id, aud, role, email, encrypted_password, confir
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: gotrue; Owner: bandirsen
 --
 
-SELECT pg_catalog.setval('gotrue.refresh_tokens_id_seq', 1, true);
+SELECT pg_catalog.setval('public.refresh_tokens_id_seq', 1, true);
 
 
 --
 -- Name: audit_log_entries idx_16496_primary; Type: CONSTRAINT; Schema: gotrue; Owner: bandirsen
 --
 
-ALTER TABLE ONLY gotrue.audit_log_entries
+ALTER TABLE ONLY public.audit_log_entries
     ADD CONSTRAINT idx_16496_primary PRIMARY KEY (id);
 
 
@@ -224,7 +224,7 @@ ALTER TABLE ONLY gotrue.audit_log_entries
 -- Name: instances idx_16502_primary; Type: CONSTRAINT; Schema: gotrue; Owner: bandirsen
 --
 
-ALTER TABLE ONLY gotrue.instances
+ALTER TABLE ONLY public.instances
     ADD CONSTRAINT idx_16502_primary PRIMARY KEY (id);
 
 
@@ -232,7 +232,7 @@ ALTER TABLE ONLY gotrue.instances
 -- Name: refresh_tokens idx_16510_primary; Type: CONSTRAINT; Schema: gotrue; Owner: bandirsen
 --
 
-ALTER TABLE ONLY gotrue.refresh_tokens
+ALTER TABLE ONLY public.refresh_tokens
     ADD CONSTRAINT idx_16510_primary PRIMARY KEY (id);
 
 
@@ -240,7 +240,7 @@ ALTER TABLE ONLY gotrue.refresh_tokens
 -- Name: users idx_16520_primary; Type: CONSTRAINT; Schema: gotrue; Owner: bandirsen
 --
 
-ALTER TABLE ONLY gotrue.users
+ALTER TABLE ONLY public.users
     ADD CONSTRAINT idx_16520_primary PRIMARY KEY (id);
 
 
@@ -248,49 +248,49 @@ ALTER TABLE ONLY gotrue.users
 -- Name: idx_16496_audit_logs_instance_id_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE INDEX idx_16496_audit_logs_instance_id_idx ON gotrue.audit_log_entries USING btree (instance_id);
+CREATE INDEX idx_16496_audit_logs_instance_id_idx ON public.audit_log_entries USING btree (instance_id);
 
 
 --
 -- Name: idx_16510_refresh_tokens_instance_id_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE INDEX idx_16510_refresh_tokens_instance_id_idx ON gotrue.refresh_tokens USING btree (instance_id);
+CREATE INDEX idx_16510_refresh_tokens_instance_id_idx ON public.refresh_tokens USING btree (instance_id);
 
 
 --
 -- Name: idx_16510_refresh_tokens_instance_id_user_id_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE INDEX idx_16510_refresh_tokens_instance_id_user_id_idx ON gotrue.refresh_tokens USING btree (instance_id, user_id);
+CREATE INDEX idx_16510_refresh_tokens_instance_id_user_id_idx ON public.refresh_tokens USING btree (instance_id, user_id);
 
 
 --
 -- Name: idx_16510_refresh_tokens_token_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE INDEX idx_16510_refresh_tokens_token_idx ON gotrue.refresh_tokens USING btree (token);
+CREATE INDEX idx_16510_refresh_tokens_token_idx ON public.refresh_tokens USING btree (token);
 
 
 --
 -- Name: idx_16517_version_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE UNIQUE INDEX idx_16517_version_idx ON gotrue.schema_migration USING btree (version);
+CREATE UNIQUE INDEX idx_16517_version_idx ON public.schema_migration USING btree (version);
 
 
 --
 -- Name: idx_16520_users_instance_id_email_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE INDEX idx_16520_users_instance_id_email_idx ON gotrue.users USING btree (instance_id, email);
+CREATE INDEX idx_16520_users_instance_id_email_idx ON public.users USING btree (instance_id, email);
 
 
 --
 -- Name: idx_16520_users_instance_id_idx; Type: INDEX; Schema: gotrue; Owner: bandirsen
 --
 
-CREATE INDEX idx_16520_users_instance_id_idx ON gotrue.users USING btree (instance_id);
+CREATE INDEX idx_16520_users_instance_id_idx ON public.users USING btree (instance_id);
 
 
 --
